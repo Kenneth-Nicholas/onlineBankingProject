@@ -1,0 +1,14 @@
+.body {
+	background-image: url('../images/cave.jpg');
+	position: center;
+	width: 1920px;
+	height: 1080px;
+	text-align: center;
+	align-items: center;
+	color: white;
+}
+
+.typing {
+	width: 250px;
+	height: auto;
+}
