@@ -1,8 +1,23 @@
-.body {
+#register {
+	height: 1450px;
 	background-image: url('../images/cave.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-origin: content-box; 
 	position: center;
-	width: 1920px;
-	height: 1080px;
+	text-align: center;
+	align-items: center;
+	color: white;
+	
+}
+
+#index {
+	height: 1276px;
+	background-image: url('../images/cave.jpg');
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-origin: content-box; 
+	position: center;
 	text-align: center;
 	align-items: center;
 	color: white;
@@ -11,4 +26,40 @@
 .typing {
 	width: 250px;
 	height: auto;
+}
+
+.container {
+	text-align: left;
+	width: 500px;
+	height: 500px;
+}
+
+.linkToLogin {
+  text-align: center;
+  color: rgb(0, 255, 0);
+}
+
+.linkToRegister {
+  text-align: center;
+  color: rgb(0, 255, 0);
+}
+
+.btn {
+  position: center;
+  background-color: white;
+  color: black;
+  padding: 7px 14px;
+  font-size: 16px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.toRegister {
+	color: rgb(0, 255, 0);
+	font-size: 20px;
+}
+
+.toLogin {
+	color: rgb(0, 255, 0);
+	font-size: 20px;
 }

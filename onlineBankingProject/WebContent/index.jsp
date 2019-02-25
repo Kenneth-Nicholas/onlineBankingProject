@@ -9,77 +9,54 @@
 	
 		<meta charset="ISO-8859-1">
 
-		<title>Bank Login</title>
-
-		<link rel="stylesheet" type="text/css" href="styles/styles.css">
+		<title>First Bank of Humanity - Login</title>
 		
 		<link rel="stylesheet" 
 		      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 		      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
 		      crossorigin="anonymous">
+		      
+		<link rel="stylesheet" type="text/css" href="styles/styles.css">
 
 	</head>
 
 	<body>
 
-		<div class="body">
+		<div class="body" id="index">
 
 		<h1>First Bank of Humanity</h1>	
 
 		<img class="typing" src="images/cavemanComputer.jpg">
+		
+		<h1>Login</h1> 
 
-		<div id="bankLogin">
+		<form class="container"> 
+		
+			<div class="formBackground">
+			
+				<h4 style="color:rgb(0, 255, 0)">Account:</h4>
+				
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" class="form-control" name="username" id="username" placeholder="Username">
+				</div>
 
-		<a class="hiddenLoginAnchor" id="toLogin"></a>
-
-		<div id="wrapper">
-
-		<div id="login" class="animateLogin">
-
-			<form  action="mysuperscript.php" autocomplete="on"> 
-
-				<h1>Login</h1> 
-
-				<p> 
-
-					<label for="username" class="username" data-icon="u" > Username: </label>
-					<input id="username" name="username" required="required" type="text" placeholder="Username"/>
-
-				</p>
-
-				<p> 
-
-					<label for="password" class="loginPassword" data-icon="p"> Password: </label>
-					<input id="password" name="password" required="required" type="password" placeholder="Password" /> 
-
-				</p>
-
-				<p class="keepLogin"> 
-
-					<input type="checkbox" name="loginKeeping" id="loginKeeping" value="loginKeeping" /> 
-					<label for="loginkeeping"> Keep me logged in </label>
-
-				</p>
-
-				<p class="loginButton"> 
-
-					<input type="submit" value="Login" /> 
-
-				</p>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+				</div>
+				
+				<button type="submit" class="btn btn-default">Login</button>
 
 				<p class="linkToRegister">
 
-					<a href="register.jsp" class="toRegister"> Register </a>
+					<a href="register.jsp" class="toRegister">Link to Registration Page</a>
 
 				</p>
+				
+			</div>
 
-			</form>
-
-		</div>
-
-		</div>
-
-		</div>  
+		</form>
 		
 		</div>
 
