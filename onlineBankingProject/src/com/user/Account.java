@@ -9,14 +9,17 @@ public class Account {
 	private Address address;
 	private String phoneNumber;
 	private String emailAddress;
+	private int accountNumber = 0;
+	private double accountBalance = 0.0d;
 	
 	public Account() {
 		
 		super();
 		
+		accountNumber++;
 	}
 
-	public Account(String firstName, String lastName, String userName, String password, Address address, String phoneNumber, String emailAddress) {
+	public Account(String firstName, String lastName, String userName, String password, Address address, String phoneNumber, String emailAddress, double accountBalance) {
 		
 		super();
 		
@@ -27,7 +30,10 @@ public class Account {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
+		this.accountBalance = accountBalance;
 		
+		accountNumber++;
+
 	}
 
 	public String getFirstName() {
@@ -113,6 +119,24 @@ public class Account {
 		this.emailAddress = emailAddress;
 		
 	}
+	
+	public int getAccountNumber() {
+		
+		return accountNumber;
+		
+	}
+	
+	public Double getAccountBalance() {
+		
+		return accountBalance;
+		
+	}
+	
+	public void setAccountBalance(double accountBalance) {
+		
+		this.accountBalance = accountBalance;
+		
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -127,6 +151,12 @@ public class Account {
 			return false;
 		
 		Account other = (Account) obj;
+		
+		if (Double.doubleToLongBits(accountBalance) != Double.doubleToLongBits(other.accountBalance))
+			return false;
+		
+		if (accountNumber != other.accountNumber)
+			return false;
 		
 		if (address == null) {
 			
@@ -190,8 +220,9 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return firstName + " " + lastName + "\nUsername = " + userName + "\nPassword = "
-				+ password + "\n" + address.toString() + "\n" + phoneNumber + "\n" + emailAddress;
+		
+		return firstName + " " + lastName + "<br>Username: " + userName + "<br>" + address.toString() + "<br>Phone Number: " + phoneNumber + "<br>Email Address: " + emailAddress + "<br>Account Number: " + accountNumber;
+		
 	}
 	
 }

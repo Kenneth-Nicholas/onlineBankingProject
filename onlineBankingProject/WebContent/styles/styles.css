@@ -11,6 +11,19 @@
 	
 }
 
+.body {
+	height: auto;
+	background-image: url('../images/cave.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-origin: content-box; 
+	position: center;
+	text-align: center;
+	align-items: center;
+	color: white;
+	
+}
+
 #index {
 	height: 1276px;
 	background-image: url('../images/cave.jpg');
@@ -32,6 +45,28 @@
 	text-align: left;
 	width: 500px;
 	height: 500px;
+}
+
+.accountGreeting {
+	width: 100%;
+	position: center;
+	text-align: left;
+	align-items: center;
+	padding-left: 200px;]
+}
+
+.accountTransactions {
+	width: 100%;
+	position: center;
+	align-items: center;
+}
+
+.accountForm {
+	align-items: center;
+	padding-left: 200px;
+	text-align: left;
+	width: 500px;
+	height: auto;
 }
 
 .linkToLogin {
