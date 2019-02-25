@@ -30,11 +30,11 @@
 		
 			<h1>Register</h1>
 
-			<form class="container">
+			<form class="container" action="RegistrationServlet" method="post">
 			
 				<div class="formBackground">
 				
-				<h4 style="color:rgb(0, 255, 0)">Name</h4>
+				<h4 style="color:rgb(0, 255, 0)">Name:</h4>
 			
 				<div class="form-group">
 					<label for="firstName">First Name</label>
@@ -49,8 +49,8 @@
 				<h4 style="color:rgb(0, 255, 0)">Account Information:</h4>
 				
 				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" class="form-control" name="username" id="username" placeholder="Username">
+					<label for="userName">Username</label>
+					<input type="text" class="form-control" name="userName" id="userName" placeholder="Username">
 				</div>
 
 				<div class="form-group">
