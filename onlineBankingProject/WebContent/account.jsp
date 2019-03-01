@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
-<%@ page import="com.user.Account" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-<% Account account = (Account) session.getAttribute("account"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+<%@ page import="com.user.Customer" %>
+
+<% Customer customer = (Customer) session.getAttribute("customer"); %>
     
 <!DOCTYPE html>
 
@@ -43,7 +44,7 @@
 					
 					</button>
 					
-					<h1>Hello, <% out.print(account.getFirstName()); %> <% out.print(account.getLastName()); %></h1>
+					<h1>Hello, <% out.print(customer.getFirstName()); %> <% out.print(customer.getLastName()); %></h1>
 					
 					<p>Thank you for choosing <span style="color:rgb(0, 255, 0)">First Bank of Humanity!</span>
 					Where Banking is so easy, a caveman could do it.</p> 
@@ -52,11 +53,11 @@
 					
 					<p style="color:rgb(0, 255, 0)">Displaying account details</p>
 					
+					<p>Current account balance: <%  out.print(customer.getAccounts().get(0).getAccountBalance()); %></p>
+					
 					<br>
 					
-					<p><% out.print(account.toString()); %></p>
-					
-					<p style="color:rgb(0, 255, 0)"><% out.print("Your current Accound Balance is: " + account.getAccountBalance()); %></p>
+					<p><% out.print(customer.toString()); %></p>
 					
 				</div>
 					
@@ -68,13 +69,21 @@
 		
 		<div class="accountTransactions">
 		
-			<form class="accountForm" action="DepositServlet" method="get">
+			<form class="accountForm" action="DepositServlet" method="post">
 			
 				<div class="form-group">
 					<label for="Make Deposit" style="color:rgb(0, 255, 0)">Make Deposit</label>
 					<input type="text" class="form-control" name="depositAmount" id="depositAmount" placeholder="Deposit Amount">
+					<!--  Make is so that you loop through all the accounts so that the person can select which account they're depositing to -->	
 				</div>
 				
+				<label for="cashOrCheck" >Cash or Check</label>
+				<select class="form-control" name="cashOrCheck">			
+					<option value="Cash">Cash</option>	
+					<option value="Check">Check</option>							
+				</select>
+				<br>
+	
 				<button type="submit" class="btn btn-default">Complete Deposit</button>
 				
 			</form>
@@ -86,6 +95,7 @@
 				<div class="form-group">
 					<label for="Make Withdrawal" style="color:rgb(0, 255, 0)">Make Withdrawal</label>
 					<input type="text" class="form-control" name="withdrawalAmount" id="makeWithdrawal" placeholder="Withdrawal Amount">
+					<!--  Make is so that you loop through all the accounts so that the person can select which account they're withdrawing from -->
 				</div>
 				
 				<button type="submit" class="btn btn-default">Complete Withdrawal</button>
@@ -125,6 +135,8 @@
 					<label for="Vendor Zip Code">Vendor Zip Code</label>
 					<input type="text" class="form-control" name="vendorZipCode" id="vendorZipCode" placeholder="Vendor Zip Code">
 				</div>
+					
+				<!--  Make is so that you loop through all the accounts so that the person can select which account they're charging to -->
 				
 				<button type="submit" class="btn btn-default">Submit Transaction</button>
 				
@@ -132,7 +144,39 @@
 			
 			<br>
 			
-		</div>
+<!-- HERE WE WILL LOOP THROUGH AN ACCOUNT'S TRANSACTION HISTORY, and loop through all accounts printing them out and their history -->			
+			
+				<c:if test="${customer.getAccounts().get(0) != null}">
+					
+					<table style="width:100%">
+					
+  						<tr>
+  						
+    						<th>Amount</th>
+    						<th>Transaction Type</th> 
+    						<th>Vendor Name</th>
+    						<th>Vendor Address</th>
+    						
+  						</tr>
+ 						 
+					    <c:forEach var="transaction" items="${transactions}">
+ 						 
+							<tr>      
+    						
+								<td><c:out value="${transaction.amount}"/></td>
+								<td><c:out value="${transaction.transactionType}"/></td>
+								<td><c:out value="${transaction.vendorName}"/></td>
+								<td><c:out value="${transaction.vendorAddress}"/></td>
+                                 
+							</tr>
+                            
+						</c:forEach>
+
+					</table>
+						
+				</c:if>
+			
+			</div>
 		
 		</div>
 

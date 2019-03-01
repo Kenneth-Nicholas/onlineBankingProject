@@ -1,6 +1,7 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.user.Account;
 import com.user.Address;
+import com.user.Customer;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -33,12 +35,12 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Account account = new Account();
+		Customer customer = new Customer();
 		
-		account.setFirstName(request.getParameter("firstName"));
-		account.setLastName(request.getParameter("lastName"));
-		account.setUserName(request.getParameter("userName"));
-		account.setPassword(request.getParameter("password"));
+		customer.setFirstName(request.getParameter("firstName"));
+		customer.setLastName(request.getParameter("lastName"));
+		customer.setUserName(request.getParameter("userName"));
+		customer.setPassword(request.getParameter("password"));
 		
 		Address address = new Address();
 		
@@ -47,13 +49,21 @@ public class RegistrationServlet extends HttpServlet {
 		address.setState(request.getParameter("state"));
 		address.setZipCode(request.getParameter("zipCode"));
 		
-		account.setAddress(address);
+		customer.setAddress(address);
 		
-		account.setEmailAddress(request.getParameter("emailAddress"));
-		account.setPhoneNumber(request.getParameter("phoneNumber"));
+		customer.setEmailAddress(request.getParameter("emailAddress"));
+		customer.setPhoneNumber(request.getParameter("phoneNumber"));
+		
+		Account account = new Account();
+		
+		ArrayList<Account> accounts = new ArrayList<Account>();
+		
+		accounts.add(account);
+		
+		customer.setAccounts(accounts);
 		
 		HttpSession session = request.getSession(true);
-		session.setAttribute("account", account);
+		session.setAttribute("customer", customer);
 		
 		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
 		rs.forward(request, response);

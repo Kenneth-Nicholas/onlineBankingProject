@@ -1,6 +1,7 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.user.Customer;
 import com.user.Account;
+import com.user.Transaction;
 import com.user.Address;
 
 /**
@@ -37,15 +40,29 @@ public class TransactionServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		
-		Account account = (Account)session.getAttribute("account");
+		Customer customer = (Customer)session.getAttribute("customer");
 		
-		account.setAccountBalance(account.getAccountBalance() - transactionAmount);
+		ArrayList<Account> accounts = customer.getAccounts();
+		
+		ArrayList<Transaction> transactions = accounts.get(0).getTransactions();
+		
+		transactions.get(0).setAmount(transactionAmount);
+		transactions.get(0).setTransactionType("Charge");
+		transactions.get(0).setVendorName(request.getParameter("vendorName"));
+		Address address = new Address(request.getParameter("vendorStreetAddress"), request.getParameter("vendorCity"), request.getParameter("vendorState"), request.getParameter("vendorZipCode"));
+		transactions.get(0).setVendorAddress(address);
+		
+		accounts.get(0).setTransactions(transactions);
+		
+		accounts.get(0).setAccountBalance(accounts.get(0).getAccountBalance() - transactionAmount);
+		
+		customer.setAccounts(accounts);
 
-		session.setAttribute("account", account);
+		session.setAttribute("customer", customer);
 	
 		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
 		rs.forward(request, response);
-			
+
 	}
 
 	/**

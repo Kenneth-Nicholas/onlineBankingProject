@@ -1,6 +1,7 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.user.Customer;
 import com.user.Account;
+import com.user.Transaction;
 import com.user.Address;
+
 
 /**
  * Servlet implementation class DepositServlet
@@ -37,11 +41,47 @@ public class DepositServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		
-		Account account = (Account)session.getAttribute("account");
+		Customer customer = new Customer();
 		
-		account.setAccountBalance(account.getAccountBalance() + depositAmount);
+		customer = (Customer)session.getAttribute("customer");
+		
+		
+		 ArrayList<Account> accounts = customer.getAccounts();
+		 /* Account(); accounts.add(account);
+	
+		accounts = customer.getAccounts();
+			 */
+		ArrayList<Transaction> transactions = customer.getAccounts().get(0).getTransactions();
+		Transaction transaction = new Transaction();
+		transactions.add(transaction);
 
-		session.setAttribute("account", account);
+		
+		
+		accounts.get(0).setAccountBalance(accounts.get(0).getAccountBalance() + depositAmount);
+		
+		String cashOrCheck = request.getParameter("cashOrCheck");
+		
+		if(cashOrCheck.equals("Check")) {
+			
+			transactions.get(0).setAmount(depositAmount);
+			transactions.get(0).setTransactionType("Check");
+			transactions.get(0).setVendorName("N/A");
+			Address address = new Address("N/A", "N/A", "N/A", "N/A");
+			transactions.get(0).setVendorAddress(address);
+			
+		} else if (cashOrCheck.equals("Cash")) {
+			
+			transactions.get(0).setAmount(depositAmount);
+			transactions.get(0).setTransactionType("Cash");
+			transactions.get(0).setVendorName("N/A");
+			Address address = new Address("N/A", "N/A", "N/A", "N/A");
+			transactions.get(0).setVendorAddress(address);
+			
+		}
+		customer.getAccounts().get(0).setTransactions(transactions);
+		customer.setAccounts(accounts);
+
+		session.setAttribute("customer", customer);
 	
 		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
 		rs.forward(request, response);
