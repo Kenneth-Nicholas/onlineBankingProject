@@ -45,43 +45,40 @@ public class DepositServlet extends HttpServlet {
 		
 		customer = (Customer)session.getAttribute("customer");
 		
-		
-		 ArrayList<Account> accounts = customer.getAccounts();
-		 /* Account(); accounts.add(account);
-	
-		accounts = customer.getAccounts();
-			 */
+		ArrayList<Account> accounts = customer.getAccounts();
+
 		ArrayList<Transaction> transactions = customer.getAccounts().get(0).getTransactions();
 		Transaction transaction = new Transaction();
-		transactions.add(transaction);
-
-		
-		
-		accounts.get(0).setAccountBalance(accounts.get(0).getAccountBalance() + depositAmount);
 		
 		String cashOrCheck = request.getParameter("cashOrCheck");
 		
 		if(cashOrCheck.equals("Check")) {
 			
-			transactions.get(0).setAmount(depositAmount);
-			transactions.get(0).setTransactionType("Check");
-			transactions.get(0).setVendorName("N/A");
+			transaction.setAmount(depositAmount);
+			transaction.setTransactionType("Check");
+			transaction.setVendorName("N/A");
 			Address address = new Address("N/A", "N/A", "N/A", "N/A");
-			transactions.get(0).setVendorAddress(address);
+			transaction.setVendorAddress(address);
 			
 		} else if (cashOrCheck.equals("Cash")) {
 			
-			transactions.get(0).setAmount(depositAmount);
-			transactions.get(0).setTransactionType("Cash");
-			transactions.get(0).setVendorName("N/A");
+			transaction.setAmount(depositAmount);
+			transaction.setTransactionType("Cash");
+			transaction.setVendorName("N/A");
 			Address address = new Address("N/A", "N/A", "N/A", "N/A");
-			transactions.get(0).setVendorAddress(address);
+			transaction.setVendorAddress(address);
 			
 		}
+	
+		transactions.add(transaction);
+
+		accounts.get(0).setAccountBalance(accounts.get(0).getAccountBalance() + depositAmount);
+
 		customer.getAccounts().get(0).setTransactions(transactions);
 		customer.setAccounts(accounts);
 
 		session.setAttribute("customer", customer);
+		session.setAttribute("transactions", transactions);
 	
 		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
 		rs.forward(request, response);

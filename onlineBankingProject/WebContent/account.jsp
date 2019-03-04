@@ -146,7 +146,7 @@
 			
 <!-- HERE WE WILL LOOP THROUGH AN ACCOUNT'S TRANSACTION HISTORY, and loop through all accounts printing them out and their history -->			
 			
-				<c:if test="${customer.getAccounts().get(0) != null}">
+				<c:if test="${customer.getAccounts().get(0).getTransactions() != null}">
 					
 					<table style="width:100%">
 					
@@ -167,7 +167,7 @@
 								<td><c:out value="${transaction.transactionType}"/></td>
 								<td><c:out value="${transaction.vendorName}"/></td>
 								<td><c:out value="${transaction.vendorAddress}"/></td>
-                                 
+                                
 							</tr>
                             
 						</c:forEach>

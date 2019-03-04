@@ -48,20 +48,22 @@ public class TransactionServlet extends HttpServlet {
 
 		ArrayList<Transaction> transactions = customer.getAccounts().get(0).getTransactions();
 		Transaction transaction = new Transaction();
+		
+		transaction.setAmount(transactionAmount);
+		transaction.setTransactionType("Charge");
+		transaction.setVendorName(request.getParameter("vendorName"));
+		Address address = new Address(request.getParameter("vendorStreetAddress"), request.getParameter("vendorCity"), request.getParameter("vendorState"), request.getParameter("vendorZipCode"));
+		transaction.setVendorAddress(address);
+		
 		transactions.add(transaction);
 		
 		accounts.get(0).setAccountBalance(accounts.get(0).getAccountBalance() - transactionAmount);
-			
-		transactions.get(0).setAmount(transactionAmount);
-		transactions.get(0).setTransactionType("Charge");
-		transactions.get(0).setVendorName(request.getParameter("vendorName"));
-		Address address = new Address(request.getParameter("vendorStreetAddress"), request.getParameter("vendorCity"), request.getParameter("vendorState"), request.getParameter("vendorZipCode"));
-		transactions.get(0).setVendorAddress(address);
 			
 		customer.getAccounts().get(0).setTransactions(transactions);
 		customer.setAccounts(accounts);
 
 		session.setAttribute("customer", customer);
+		session.setAttribute("transactions", transactions);
 	
 		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
 		rs.forward(request, response);

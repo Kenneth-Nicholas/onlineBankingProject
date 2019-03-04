@@ -48,20 +48,22 @@ public class WithdrawalServlet extends HttpServlet {
 
 		ArrayList<Transaction> transactions = customer.getAccounts().get(0).getTransactions();
 		Transaction transaction = new Transaction();
+		
+		transaction.setAmount(withdrawalAmount);
+		transaction.setTransactionType("Withdrawal");
+		transaction.setVendorName("N/A");
+		Address address = new Address("N/A", "N/A", "N/A", "N/A");
+		transaction.setVendorAddress(address);
+		
 		transactions.add(transaction);
 		
 		accounts.get(0).setAccountBalance(accounts.get(0).getAccountBalance() - withdrawalAmount);
-			
-		transactions.get(0).setAmount(withdrawalAmount);
-		transactions.get(0).setTransactionType("Withdrawal");
-		transactions.get(0).setVendorName("N/A");
-		Address address = new Address("N/A", "N/A", "N/A", "N/A");
-		transactions.get(0).setVendorAddress(address);
 			
 		customer.getAccounts().get(0).setTransactions(transactions);
 		customer.setAccounts(accounts);
 
 		session.setAttribute("customer", customer);
+		session.setAttribute("transactions", transactions);
 	
 		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
 		rs.forward(request, response);
