@@ -1,5 +1,6 @@
 package com.user;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Account {
@@ -34,13 +35,22 @@ public class Account {
 	
 	public Double getAccountBalance() {
 		
-		return accountBalance;
+		DecimalFormat df = new DecimalFormat("0.00");
 		
+		String formatted = df.format(this.accountBalance);
+		
+		this.accountBalance = Double.parseDouble(formatted);
+		
+		return accountBalance;
 	}
 	
 	public void setAccountBalance(double accountBalance) {
 		
-		this.accountBalance = accountBalance;
+		DecimalFormat df = new DecimalFormat("0.00");
+		
+		String formatted = df.format(accountBalance);
+		
+		this.accountBalance = Double.parseDouble(formatted);
 		
 	}
 	
