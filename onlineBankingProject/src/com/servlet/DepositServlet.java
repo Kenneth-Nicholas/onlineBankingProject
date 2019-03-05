@@ -73,12 +73,15 @@ public class DepositServlet extends HttpServlet {
 		transactions.add(transaction);
 
 		accounts.get(0).setAccountBalance(accounts.get(0).getAccountBalance() + depositAmount);
+		
+		double accountBalance = accounts.get(0).getAccountBalance();
 
 		customer.getAccounts().get(0).setTransactions(transactions);
 		customer.setAccounts(accounts);
 
 		session.setAttribute("customer", customer);
 		session.setAttribute("transactions", transactions);
+		session.setAttribute("accountBalance", accountBalance);
 	
 		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
 		rs.forward(request, response);

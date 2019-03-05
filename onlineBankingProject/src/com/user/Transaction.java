@@ -1,5 +1,7 @@
 package com.user;
 
+import java.text.DecimalFormat;
+
 public class Transaction {
 	
 	private double amount;
@@ -26,7 +28,13 @@ public class Transaction {
 
 	public double getAmount() {
 		
-		return amount;
+		DecimalFormat df = new DecimalFormat("#.00");
+		
+		String formatted = df.format(this.amount);
+		
+		Double amountChanged = Double.parseDouble(formatted);
+		
+		return amountChanged;
 		
 	}
 

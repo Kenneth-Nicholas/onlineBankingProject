@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <%@ page import="com.user.Customer" %>
 
@@ -53,7 +55,7 @@
 					
 					<p style="color:rgb(0, 255, 0)">Displaying account details</p>
 					
-					<p>Current account balance: <%  out.print(customer.getAccounts().get(0).getAccountBalance()); %></p>
+					<p>Current account balance: <fmt:formatNumber type="number" minFractionDigits="2" value="${accountBalance}"/> </p>
 					
 					<br>
 					
@@ -163,7 +165,7 @@
  						 
 							<tr>      
     						
-								<td><c:out value="${transaction.amount}"/></td>
+								<td><fmt:formatNumber type="number" minFractionDigits="2" value="${transaction.amount}" /></td>
 								<td><c:out value="${transaction.transactionType}"/></td>
 								<td><c:out value="${transaction.vendorName}"/></td>
 								<td><c:out value="${transaction.vendorAddress}"/></td>
