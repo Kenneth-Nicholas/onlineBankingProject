@@ -31,7 +31,7 @@
 		
 		<h1>Login</h1> 
 
-		<form class="container"> 
+		<form class="container" action="LoginServlet" method="post"> 
 		
 			<div class="formBackground">
 			

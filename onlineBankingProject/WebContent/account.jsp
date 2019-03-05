@@ -46,6 +46,8 @@
 					
 					</button>
 					
+					<a style="color:rgb(0, 255, 0)" href="index.jsp">Sign Out</a>
+					
 					<h1>Hello, <% out.print(customer.getFirstName()); %> <% out.print(customer.getLastName()); %></h1>
 					
 					<p>Thank you for choosing <span style="color:rgb(0, 255, 0)">First Bank of Humanity!</span>
@@ -67,7 +69,7 @@
 					
 			</div>
 		
-		</nav>
+</nav>
 		
 		<div class="accountTransactions">
 		
